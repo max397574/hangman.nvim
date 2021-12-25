@@ -367,14 +367,41 @@ local function reset()
   if hangman_win~=nil then
     vim.api.nvim_win_close(hangman_win, true)
   end
+  letters_used = {
+  a = false,
+  b = false,
+  c = false,
+  d = false,
+  e = false,
+  f = false,
+  g = false,
+  h = false,
+  i = false,
+  j = false,
+  k = false,
+  l = false,
+  m = false,
+  n = false,
+  o = false,
+  p = false,
+  q = false,
+  r = false,
+  s = false,
+  t = false,
+  u = false,
+  v = false,
+  w = false,
+  x = false,
+  y = false,
+  z = false,
+}
   guessed_word = {}
   hangman_buf = vim.api.nvim_create_buf(false, true)
   fails = 1
   hangman.word = nil
 end
 
-
-function hangman.setup()
+function hangman.play_hangman()
   reset()
   hangman.word = vim.api.nvim_exec("!curl -s https://random-word-api.herokuapp.com/word",true)
   hangman.word = hangman.word:sub(54,-1):gsub('%[%"(.+)%"%]',"%1")
